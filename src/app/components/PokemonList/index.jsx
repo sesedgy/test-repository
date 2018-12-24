@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react';
 import PokemonList from './PokemonList';
 
 const Component = inject('appState', 'pokemonsFilteredList')(observer(({ appState, pokemonsFilteredList }) => {
-  if (appState.pokemonsUrlsList.length > 0) {
+  if (appState.pokemonsUrlsList.length > 0 && pokemonsFilteredList.pokemonsFilteredList.length === 0) {
     pokemonsFilteredList.filterByPage();
   }
   return <PokemonList pokemonList={pokemonsFilteredList.pokemonsFilteredList} />;
