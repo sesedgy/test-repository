@@ -9,10 +9,10 @@ class AppState {
   }
 
   @observable
-  pokemonsUrlsList;
+  pokemonsUrlsList = [];
 
   @observable
-  typesUrlsList;
+  typesUrlsList = [];
 
   @action
   initAppState() {
@@ -21,8 +21,8 @@ class AppState {
       ApiService.get(API_PATHS.GET.POKEMONS_LIST),
       ApiService.get(API_PATHS.GET.TYPES_LIST),
     ]).then((results) => {
-      this.pokemonsUrlsList = results[0].results;
-      this.typesUrlsList = results[1].results;
+      this.pokemonsUrlsList = results[0].data.results;
+      this.typesUrlsList = results[1].data.results;
       loaderStore.hide();
     }).catch(() => {
       loaderStore.hide();

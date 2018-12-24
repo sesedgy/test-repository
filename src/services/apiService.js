@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { API_CONFIG } from '../constants';
+import loaderStore from '../stores/LoaderStore';
 
 const instance = axios.create({
   baseURL: `${API_CONFIG.protocol}://${API_CONFIG.hostName}${API_CONFIG.versionPath}`,
@@ -20,10 +21,13 @@ class ApiService {
   }
 
   static async getList(promisesList) {
+    loaderStore.show();
     let resultsList = [];
     await Promise.all(promisesList).then((results) => {
-      resultsList = results;
+      resultsList = results.map(result => result.data);
+      loaderStore.hide();
     }).catch(() => {
+      loaderStore.hide();
       // TODO обработка ошибок
     });
     return resultsList;

@@ -1,33 +1,14 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
-import PokemonCard from '../PokemonCard';
+import PokemonList from './PokemonList';
 
-
-class PokemonList extends Component {
-  state = {
-  };
-
-  componentDidMount() {
-
+const Component = inject('appState', 'pokemonsFilteredList')(observer(({ appState, pokemonsFilteredList }) => {
+  if (appState.pokemonsUrlsList.length > 0) {
+    pokemonsFilteredList.filterByPage();
   }
+  return <PokemonList pokemonList={pokemonsFilteredList.pokemonsFilteredList} />;
+}));
 
-  render() {
-    // const { } = this.state;
-    const { appState, pokemonList = [] } = this.props;
-    console.log(appState.typesUrlsList);
-    return (
-      <div>
-        {pokemonList.map(pokemon => <PokemonCard pokemon={pokemon} />)}
-      </div>
-    );
-  }
-}
-
-PokemonList.propTypes = {
-  appState: PropTypes.shape({}).isRequired,
-  pokemonList: PropTypes.shape({}).isRequired,
-};
-
-export default inject('appState')(observer((withRouter(PokemonList))));
+Component.displayName = 'UserList';
+export default withRouter(Component);
