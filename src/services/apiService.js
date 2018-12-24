@@ -2,7 +2,7 @@ import axios from 'axios';
 import { API_CONFIG } from '../constants';
 
 const instance = axios.create({
-  baseURL: API_CONFIG.protocol + API_CONFIG.hostName + API_CONFIG.versionPath,
+  baseURL: `${API_CONFIG.protocol}://${API_CONFIG.hostName}${API_CONFIG.versionPath}`,
   timeout: 1000,
 });
 
@@ -23,7 +23,7 @@ class ApiService {
     let resultsList = [];
     await Promise.all(promisesList).then((results) => {
       resultsList = results;
-    }).catch((error) => {
+    }).catch(() => {
       // TODO обработка ошибок
     });
     return resultsList;

@@ -1,6 +1,5 @@
 .pokeball {
     position: absolute;
-    background: url('../../../assets/img/pokemonloader.png') 0 0/cover;
     height: 50px;
     width: 50px;
     -webkit-animation: pkgif 1.14s steps(27) infinite;

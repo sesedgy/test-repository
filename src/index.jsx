@@ -2,18 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
 import { BrowserRouter } from 'react-router-dom';
-import './assets/css/styles.sass';
-import * as serviceWorker from './serviceWorker';
-import App from './app';
-import AppState from "./stores/AppState";
+import App from './app/index';
+import appState from './stores/AppState';
+import loaderStore from './stores/LoaderStore';
 
+import './index.css';
+
+const stores = { appState, loaderStore };
 
 ReactDOM.render(
-  <Provider appState={AppState}>
+  <Provider {...stores}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
   </Provider>,
   document.getElementById('root'),
 );
-serviceWorker.unregister();

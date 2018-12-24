@@ -1,0 +1,35 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+
+const SpritesCard = ({ sprites, name }) => (
+  <div className="card">
+    <div className="card-header">
+      <p className="card-header-title">
+                    Sprites
+      </p>
+    </div>
+    <div className="columns is-multiline">
+      {sprites
+        .filter(sprite => sprite !== null)
+        .reverse()
+        .map(sprite => (
+          <div className="column is-3" key={name}>
+            <figure className="image is-2by2">
+              <img
+                async
+                src={sprite}
+                alt={name}
+              />
+            </figure>
+          </div>
+        ))}
+    </div>
+  </div>
+);
+
+SpritesCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  sprites: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+export default SpritesCard;
